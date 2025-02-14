@@ -1,30 +1,18 @@
-import {
-  Button,
-  HStack,
-  ChakraProvider,
-  createSystem,
-  defineConfig,
-} from "@chakra-ui/react";
-
-const config = defineConfig({
-  theme: {
-    tokens: {
-      colors: {
-        red: "#EE0F0F",
-      },
-    },
-  },
-});
-
-const system = createSystem(config);
+import { ChakraProvider } from "@chakra-ui/react";
+import { BrowserRouter, Routes, Route } from "react-router";
+import { theme } from "./theme";
+import { UserResetPage } from "./pages/user-reset";
+import { AdminLoginPage } from "./pages/admin-login";
 
 const App = () => {
   return (
-    <ChakraProvider value={system}>
-      <HStack>
-        <Button colorPalette="red">Click me</Button>
-        <Button>Click me</Button>
-      </HStack>
+    <ChakraProvider value={theme}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<UserResetPage />} />
+          <Route path="/admin/login" element={<AdminLoginPage />} />
+        </Routes>
+      </BrowserRouter>
     </ChakraProvider>
   );
 };
