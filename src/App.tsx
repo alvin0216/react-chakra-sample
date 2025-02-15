@@ -1,9 +1,14 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter, Routes, Route } from "react-router";
 import { theme } from "./theme";
-import { UserResetPage } from "./pages/user-reset";
-import { AdminLoginPage } from "./pages/admin-login";
 import { Toaster } from "./components/ui/toaster";
+import { lazy } from "react";
+
+console.log(import.meta.env);
+
+const UserResetPage = lazy(() => import("./pages/user-reset"));
+const AdminLoginPage = lazy(() => import("./pages/admin-login"));
+
 const App = () => {
   return (
     <ChakraProvider value={theme}>
