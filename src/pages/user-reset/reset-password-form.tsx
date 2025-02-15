@@ -14,6 +14,7 @@ export const ResetPasswordForm = () => {
     register,
     handleSubmit,
     watch,
+    trigger,
     formState: { errors },
   } = useForm<FormValues>();
 
@@ -37,6 +38,7 @@ export const ResetPasswordForm = () => {
             errorText={errors.password?.message}
           >
             <PasswordInput
+              colorPalette="blue"
               placeholder="password"
               size="xl"
               {...register("password", {
@@ -54,6 +56,11 @@ export const ResetPasswordForm = () => {
                     value
                   ) ||
                   "Must include uppercase, lowercase, number, and special character",
+                onChange: () => {
+                  if (watch("confirmPassword")) {
+                    trigger("confirmPassword");
+                  }
+                },
               })}
             />
           </Field>
@@ -63,10 +70,11 @@ export const ResetPasswordForm = () => {
             errorText={errors.confirmPassword?.message}
           >
             <PasswordInput
+              colorPalette="blue"
               size="xl"
               placeholder="confirm password"
               {...register("confirmPassword", {
-                required: "Password is required",
+                required: "Please confirm your password",
                 validate: (value) =>
                   value === watch("password") ||
                   "Password and password confirmation should be the same.",
