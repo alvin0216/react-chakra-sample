@@ -1,14 +1,14 @@
-import axios from "axios";
 import { useState } from "react";
 import { toaster } from "@/components/ui/toaster";
+import { request } from "@/utils/request";
 
 export const useReset = () => {
   const [loading, setLoading] = useState(false);
 
   const reset = async (pwd: string) => {
     setLoading(true);
-    axios
-      .post("/api/reset", pwd)
+    request
+      .post("/webproxy/updatepassword", { newpasswd: pwd })
       .then(() => {
         setLoading(false);
       })

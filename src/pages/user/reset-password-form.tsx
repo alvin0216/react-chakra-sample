@@ -27,7 +27,7 @@ export const ResetPasswordForm = () => {
       justifyContent="center"
       alignItems="center"
       minHeight="100vh"
-      maxW="md"
+      maxW="lg"
       mx="auto"
     >
       <form style={{ width: "100%" }} onSubmit={onSubmit}>
@@ -37,7 +37,7 @@ export const ResetPasswordForm = () => {
           gap="4"
           px={4}
           py={6}
-          shadow="md"
+          shadow={{ base: "none", md: "md" }}
         >
           <Heading as="h1" size="2xl" textAlign="center" mb={4}>
             Reset Password
