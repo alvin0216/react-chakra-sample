@@ -4,6 +4,15 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: "./",
   envDir: "./environment",
   plugins: [react(), tsconfigPaths()],
+  build: {
+    rollupOptions: {
+      input: {
+        index: "index.html",
+        admin: "admin.html",
+      },
+    },
+  },
 });

@@ -1,9 +1,12 @@
+import { Provider } from "@/components/provider";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
+import IndexPage from "./index";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <App />
+    <Provider>
+      <IndexPage />
+    </Provider>
   </StrictMode>
 );

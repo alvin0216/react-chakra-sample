@@ -27,9 +27,18 @@ export const ResetPasswordForm = () => {
       justifyContent="center"
       alignItems="center"
       minHeight="100vh"
+      maxW="md"
+      mx="auto"
     >
-      <form onSubmit={onSubmit}>
-        <Stack direction="column" gap="4" px={4} py={6} width={420} shadow="md">
+      <form style={{ width: "100%" }} onSubmit={onSubmit}>
+        <Stack
+          width="100%"
+          direction="column"
+          gap="4"
+          px={4}
+          py={6}
+          shadow="md"
+        >
           <Heading as="h1" size="2xl" textAlign="center" mb={4}>
             Reset Password
           </Heading>
@@ -74,7 +83,6 @@ export const ResetPasswordForm = () => {
               size="xl"
               placeholder="confirm password"
               {...register("confirmPassword", {
-                required: "Please confirm your password",
                 validate: (value) =>
                   value === watch("password") ||
                   "Password and password confirmation should be the same.",
