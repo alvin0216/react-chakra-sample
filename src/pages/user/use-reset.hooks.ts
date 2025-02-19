@@ -8,7 +8,7 @@ export const useReset = () => {
   const reset = async (pwd: string) => {
     setLoading(true);
     request
-      .post("/webproxy/updatepassword", { newpasswd: pwd })
+      .post("updatepassword", { newpasswd: pwd })
       .then(() => {
         setLoading(false);
       })

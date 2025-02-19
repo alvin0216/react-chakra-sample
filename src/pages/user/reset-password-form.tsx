@@ -1,4 +1,4 @@
-import { Button, Box, Heading, Stack } from "@chakra-ui/react";
+import { Button, Box, Heading, Stack, Text } from "@chakra-ui/react";
 import { Field } from "@/components/ui/field";
 import { PasswordInput } from "@/components/ui/password-input";
 import { useForm } from "react-hook-form";
@@ -8,6 +8,9 @@ interface FormValues {
   password: string;
   confirmPassword: string;
 }
+
+const passwordRegex =
+  /^(?=\S)(?=.*\S$)((?=.*[A-Z])(?=.*[a-z])(?=.*\d)|(?=.*[A-Z])(?=.*[a-z])(?=.*[\W_])|(?=.*[A-Z])(?=.*\d)(?=.*[\W_])|(?=.*[a-z])(?=.*\d)(?=.*[\W_])).{8,20}$/;
 
 export const ResetPasswordForm = () => {
   const {
@@ -30,7 +33,7 @@ export const ResetPasswordForm = () => {
       maxW="lg"
       mx="auto"
     >
-      <form style={{ width: "100%" }} onSubmit={onSubmit}>
+      <form id="reset-form" style={{ width: "100%" }} onSubmit={onSubmit}>
         <Stack
           width="100%"
           direction="column"
@@ -47,8 +50,9 @@ export const ResetPasswordForm = () => {
             errorText={errors.password?.message}
           >
             <PasswordInput
+              id="password"
               colorPalette="blue"
-              placeholder="password"
+              placeholder="Enter password"
               size="xl"
               {...register("password", {
                 required: "Password is required",
@@ -60,11 +64,11 @@ export const ResetPasswordForm = () => {
                   value: 20,
                   message: "Password must be 8-20 characters",
                 },
-                validate: (value) =>
-                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/.test(
-                    value
-                  ) ||
-                  "Must include uppercase, lowercase, number, and special character",
+                pattern: {
+                  value: passwordRegex,
+                  message:
+                    "Must contain at least three of the following: uppercase letters, lowercase letters, numbers, and symbols.",
+                },
                 onChange: () => {
                   if (watch("confirmPassword")) {
                     trigger("confirmPassword");
@@ -79,9 +83,10 @@ export const ResetPasswordForm = () => {
             errorText={errors.confirmPassword?.message}
           >
             <PasswordInput
+              id="confirm-password"
               colorPalette="blue"
               size="xl"
-              placeholder="confirm password"
+              placeholder="Confirm password"
               {...register("confirmPassword", {
                 validate: (value) =>
                   value === watch("password") ||
@@ -89,6 +94,12 @@ export const ResetPasswordForm = () => {
               })}
             />
           </Field>
+
+          <Text pt={6} fontSize="xs" color="gray.500">
+            Passwords must have 8-20 characters and contain at least three of
+            the following: uppercase letters, lowercase letters, numbers, and
+            symbols.
+          </Text>
 
           <Button
             loading={loading}

@@ -13,6 +13,11 @@ export default defineConfig({
         index: "index.html",
         admin: "admin.html",
       },
+      output: {
+        manualChunks: {
+          chakra: ["@chakra-ui/react", "@emotion/react"],
+        },
+      },
     },
   },
 });
